@@ -1,3 +1,5 @@
-function Player(name){
-  this.name = name || "Incognito";
+//The game is typically played with two to six people
+
+function Player(){
+  this.name = "Incognito";
 }
