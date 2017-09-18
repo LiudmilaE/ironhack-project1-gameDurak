@@ -3,13 +3,14 @@ function Card (rank, suit) {
     this.suit = suit;
 }
 // a deck of 36 cards
-//The bottom card of the remaining deck is laid open on the table.
-//This determines the trump suit.
+
+
 function Deck(){
   this.cards = [];
-  this.trump = "Diamonds";
   this.remainderDeck = [];
-  this.lastCard = {};
+  this.trump = "Diamonds";
+  this.lastCard = {}; /*The bottom card of the remaining deck is laid open on the table.
+  This determines the trump suit.*/
 }
 
 
@@ -27,7 +28,6 @@ function Deck(){
     }
     that.trump = _.sample(suits,1);
     that.cards = newDeck;
-    that.remainderDeck = _.map(newDeck);
 };
 
 Deck.prototype._shuffleDeck = function () {
@@ -36,9 +36,10 @@ Deck.prototype._shuffleDeck = function () {
   that.trump = shuffledDeck[shuffledDeck.length-1].suit;
   that.lastCard =  shuffledDeck[shuffledDeck.length-1];
   that.cards = shuffledDeck;
+  that.remainderDeck = _.map(shuffledDeck);
 };
 
-Deck.prototype.cardsToBeReceived = function (num) {
+Deck.prototype._cardsToBeReceived = function (num) {
   if(this.remainderDeck.length<=num){
     return this.remainderDeck;
   }

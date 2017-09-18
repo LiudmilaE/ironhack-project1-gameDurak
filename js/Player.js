@@ -5,8 +5,12 @@ function Player(name){
   this.cards = [];
 }
 
- Player.prototype.receiveCards = function (sixCards) {
-  this.cards = sixCards;
+ Player.prototype._receiveCards = function (cards) {
+  if(this.cards.length<6){
+    this.cards = _.concat(this.cards, cards);
+    return this.cards;
+  }
+  return false;
  };
 
 Player.prototype.attack = function () {
