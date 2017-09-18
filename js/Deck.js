@@ -8,6 +8,8 @@ function Card (rank, suit) {
 function Deck(){
   this.cards = [];
   this.trump = "Diamonds";
+  this.remainderDeck = [];
+  this.lastCard = {};
 }
 
 
@@ -25,11 +27,22 @@ function Deck(){
     }
     that.trump = _.sample(suits,1);
     that.cards = newDeck;
+    that.remainderDeck = _.map(newDeck);
 };
 
 Deck.prototype._shuffleDeck = function () {
   var that = this;
   var shuffledDeck = _.shuffle(this.cards);
   that.trump = shuffledDeck[shuffledDeck.length-1].suit;
+  that.lastCard =  shuffledDeck[shuffledDeck.length-1];
   that.cards = shuffledDeck;
+};
+
+Deck.prototype.cardsToBeReceived = function (num) {
+  if(this.remainderDeck.length<=num){
+    return this.remainderDeck;
+  }
+ var newCards = _.take(this.remainderDeck, num);
+ this.remainderDeck = _.slice(this.remainderDeck,num);
+ return newCards;
 };
