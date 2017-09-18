@@ -9,9 +9,9 @@ GameDurak.prototype.startGame = function () {
   //The deck is shuffled, and each player receives six cards.
   this.deck._creatDeck();
   this.deck._shuffleDeck();
-  console.log(this.deck.trump);
+  console.log(this);
 
 
 
 
-}
+};

@@ -12,6 +12,7 @@ function Deck(){
 
 
  Deck.prototype._creatDeck = function () {
+   var that = this;
   var newDeck =[];
   var ranks =["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
@@ -22,12 +23,13 @@ function Deck(){
             index++;
         }
     }
-    //this.trump = _.sample(suits,1);
-    this.cards = newDeck;
+    that.trump = _.sample(suits,1);
+    that.cards = newDeck;
 };
 
 Deck.prototype._shuffleDeck = function () {
-  var shuffledDeck = _.shuffle(this.deck);
-  this.trump = shuffledDeck[shuffledDeck.length-1];
-  this.cards = shuffledDeck;
+  var that = this;
+  var shuffledDeck = _.shuffle(this.cards);
+  that.trump = shuffledDeck[shuffledDeck.length-1].suit;
+  that.cards = shuffledDeck;
 };
