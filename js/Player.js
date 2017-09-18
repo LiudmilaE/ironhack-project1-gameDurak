@@ -13,10 +13,13 @@ function Player(name){
   return false;
  };
 
-Player.prototype.attack = function () {
 
+//The player with the lowest trump is the first attacker.
+Player.prototype.attack = function (i) {
+ return this.cards[i];
 };
 
-Player.prototype.defense = function () {
-
+Player.prototype.defense = function (i) {
+  if (this.cards[i].isStronger){
+    return this.cards[i];}
 };

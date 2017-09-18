@@ -2,17 +2,19 @@ function Card (rank, suit) {
     this.rank = rank;
     this.suit = suit;
 }
+
 // a deck of 36 cards
-
-
+// Ace is the highest rank and six is the lowest.
+// Trumps always beat non-trump cards regardless of rank
+// (e.g., a trump six beats a non-trump ace).
 function Deck(){
   this.cards = [];
-  this.remainderDeck = [];
+  this.talon = [];//remainderDeck - so called prikup
+  this.discardPile = [];
   this.trump = "Diamonds";
   this.lastCard = {}; /*The bottom card of the remaining deck is laid open on the table.
   This determines the trump suit.*/
 }
-
 
  Deck.prototype._creatDeck = function () {
    var that = this;
@@ -36,14 +38,14 @@ Deck.prototype._shuffleDeck = function () {
   that.trump = shuffledDeck[shuffledDeck.length-1].suit;
   that.lastCard =  shuffledDeck[shuffledDeck.length-1];
   that.cards = shuffledDeck;
-  that.remainderDeck = _.map(shuffledDeck);
+  that.talon = _.map(shuffledDeck);
 };
 
 Deck.prototype._cardsToBeReceived = function (num) {
-  if(this.remainderDeck.length<=num){
-    return this.remainderDeck;
+  if(this.talon.length <= num){
+    return this.talon;
   }
- var newCards = _.take(this.remainderDeck, num);
- this.remainderDeck = _.slice(this.remainderDeck,num);
+ var newCards = _.take(this.talon, num);
+ this.talon = _.slice(this.talon, num);
  return newCards;
 };

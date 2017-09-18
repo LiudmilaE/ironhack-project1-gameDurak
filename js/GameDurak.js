@@ -1,9 +1,12 @@
 function GameDurak(num) {
-  this.deck = new Deck();//cards, trump, remainderDeck
+  this.deck = new Deck();//cards, talon, trump, lastCard
   this.numberOfPlayers = num;
   this.player1 = new Player("Incognito1");
   this.player2 = new Player("Incognito2");
   this.gameOver = false;
+
+  this.attacker = {};//The player with the lowest trump is the first attacker.
+  this.defender = {};//The player to the attacker's left is always the defender.
 }
 
 GameDurak.prototype.startGame = function () {
@@ -20,8 +23,20 @@ GameDurak.prototype.startGame = function () {
     The revealed card remains part of the talon and is drawn as the last card.
     Cards discarded due to successful defenses are placed in a discard pile
     next to the talon.*/
+
+};
+
+
+
+GameDurak.prototype.changeTurn = function () {
+  /*After each turn play proceeds clockwise.
+  If the attack succeeds, the defender loses their turn
+  and the attack passes to the player on the defender's left.
+  If the attack fails, the defender becomes the next attacker.*/
+  
+
 };
 
 GameDurak.prototype.isGameOver = function () {
-  
+
 };
