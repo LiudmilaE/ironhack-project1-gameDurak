@@ -12,6 +12,7 @@ function Card (rank, suit , strength) {
 function Deck(){
   this.cards = [];
   this.talon = [];//remainderDeck - so called prikup
+  this.receivedCards = [];
   this.discardPile = [];
   this.trumpSuit = "Diamonds";
   this.lastCard = {}; /*The bottom card of the remaining deck is laid open on the table.

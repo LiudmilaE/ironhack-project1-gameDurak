@@ -13,15 +13,28 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
   //The deck is shuffled, and each player receives six cards.
   this.deck._creatDeck();
   this.deck._shuffleDeck();
-  this.deck._shuffleDeck();
+
+
   for (var p=1; p<= numberOfPlayers; p++){
     var player = new Player("Incognito"+p);
     that.players.push(player);
   }
-
   that.players.forEach(function(el){
-    el._receiveCards(that.deck._cardsToBeReceived(6));
+    var cards = that.deck._cardsToBeReceived(6);
+    that.deck.receivedCards = _.concat(that.deck.receivedCards, cards);
+    el._receiveCards(cards);
   });
+
+  ////possible to start only if at least one player has one trump
+    //that.deck.receivedCards = _.slice(that.deck.cards,0, numberOfPlayers*6);
+    var checkTrump = _.filter(that.deck.receivedCards, function(card) { return card.isTrump; });
+    if (checkTrump.length>0){
+      isFirstAttackerVsDefender(that.players);
+    } else {
+      console.log("Not possible to start game. Nobody can attack. Try to start game again!");
+    }
+  ///////////////////////
+
 
   //The player with the lowest trump is the first attacker.
   // The player to the attacker's left is always the defender.
@@ -38,15 +51,13 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
    console.log (lowestTrumps);
    if (_.every(lowestTrumps, 100)){
      console.log("Is not possible to start the game, because no one received any trump!!!");
+     return;
    } else{
    var attackerIndex = _.indexOf(lowestTrumps, _.minBy(lowestTrumps,function(c) { return c.strength; }));
    that.players[attackerIndex].isAttacker = true;
    that.nextPlayerToTheLeft(attackerIndex).isDefender = true;
   }
  }
-
- isFirstAttacker(that.players);
-
   /*The remainder of the deck is then placed
    on top of the revealed card at a 90 degree angle, so that it remains visible,
     forming a draw pile called the prikup ("talon").
