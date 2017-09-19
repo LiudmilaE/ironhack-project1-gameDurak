@@ -1,7 +1,8 @@
-function Card (rank, suit) {
+function Card (rank, suit , strength) {
     this.rank = rank;
     this.suit = suit;
     this.isTrump = false;
+    this.strength = strength; ///from 0=weakest to 8=strongest
 }
 
 // a deck of 36 cards
@@ -21,30 +22,38 @@ function Deck(){
    var that = this;
   var newDeck =[];
   var ranks =["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  //in rank array index=j will show the strength of card
   var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
   var i, j, index=0;
     for (i = 0; i < suits.length; i++) {
         for (j = 0; j < ranks.length; j++) {
-            newDeck[index] = new Card(ranks[j], suits[i]);
+            newDeck[index] = new Card(ranks[j], suits[i], j);
             index++;
         }
     }
     that.cards = newDeck;
 };
 
+
 Deck.prototype._shuffleDeck = function () {
   var that = this;
   var shuffledDeck = _.shuffle(this.cards);
-  that.trumpSuit = shuffledDeck[shuffledDeck.length-1].suit;
-//need function to mark in each card property isTrump false or true
+      shuffledDeck = _.shuffle(this.cards);
+
+  // The bottom card of the remaining deck is laid open on the table.
+  // This determines the trump suit.
+  that.lastCard =  shuffledDeck[shuffledDeck.length-1];
+  that.trumpSuit = that.lastCard.suit;
+
+ // function to mark in each card property isTrump false or true
   shuffledDeck.forEach(function(card){
     card.isTrump = card.suit===that.trumpSuit ? true : false;
     });
-    
-  that.lastCard =  shuffledDeck[shuffledDeck.length-1];
+
   that.cards = shuffledDeck;
   that.talon = _.map(shuffledDeck);
 };
+
 
 Deck.prototype._cardsToBeReceived = function (num) {
   if(this.talon.length <= num){

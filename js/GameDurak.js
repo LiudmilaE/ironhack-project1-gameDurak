@@ -17,13 +17,15 @@ GameDurak.prototype.startGame = function () {
   this.player1._receiveCards(this.deck._cardsToBeReceived(6));
   this.player2._receiveCards(this.deck._cardsToBeReceived(6));
 
-  if(this.player1.cards){
+  //The player with the lowest trump is the first attacker.
+  if(this.player1.cardsTrump.length !== 0 && this.player2.cardsTrump.length === 0){
     this.attacker = this.player1;
-  } else {
+  } else if(this.player1.cardsTrump.length === 0 && this.player2.cardsTrump.length !== 0) {
     this.attacker = this.player2;
+  } else {
+    
   }
-  /*The bottom card of the remaining deck is laid open on the table.
-  This determines the trump suit. The remainder of the deck is then placed
+  /*The remainder of the deck is then placed
    on top of the revealed card at a 90 degree angle, so that it remains visible,
     forming a draw pile called the prikup ("talon").
     The revealed card remains part of the talon and is drawn as the last card.
