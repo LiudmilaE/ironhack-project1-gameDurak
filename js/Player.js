@@ -4,6 +4,8 @@ function Player(name){
   this.name = name;
   this.cards = [];
   this.cardsTrump = [];
+  this.isAttacker = false;
+  this.isDefender = false;
 }
 
  Player.prototype._receiveCards = function (cards) {
