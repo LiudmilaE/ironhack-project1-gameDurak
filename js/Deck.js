@@ -37,8 +37,8 @@ function Deck(){
 
 Deck.prototype._shuffleDeck = function () {
   var that = this;
-  var shuffledDeck = _.shuffle(this.cards);
-      shuffledDeck = _.shuffle(this.cards);
+  var shuffledDeck = _.shuffle(that.cards);
+      shuffledDeck = _.shuffle(that.cards);
 
   // The bottom card of the remaining deck is laid open on the table.
   // This determines the trump suit.

@@ -1,7 +1,7 @@
-var game = new GameDurak(2);
+var game = new GameDurak();
 
 $(document).ready(function(){
-game.startGame();
+game.startGame(2);
 
 
 
