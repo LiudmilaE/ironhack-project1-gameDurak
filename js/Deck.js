@@ -1,6 +1,7 @@
 function Card (rank, suit) {
     this.rank = rank;
     this.suit = suit;
+    this.isTrump = false;
 }
 
 // a deck of 36 cards
@@ -11,7 +12,7 @@ function Deck(){
   this.cards = [];
   this.talon = [];//remainderDeck - so called prikup
   this.discardPile = [];
-  this.trump = "Diamonds";
+  this.trumpSuit = "Diamonds";
   this.lastCard = {}; /*The bottom card of the remaining deck is laid open on the table.
   This determines the trump suit.*/
 }
@@ -28,14 +29,18 @@ function Deck(){
             index++;
         }
     }
-    that.trump = _.sample(suits,1);
     that.cards = newDeck;
 };
 
 Deck.prototype._shuffleDeck = function () {
   var that = this;
   var shuffledDeck = _.shuffle(this.cards);
-  that.trump = shuffledDeck[shuffledDeck.length-1].suit;
+  that.trumpSuit = shuffledDeck[shuffledDeck.length-1].suit;
+//need function to mark in each card property isTrump false or true
+  shuffledDeck.forEach(function(card){
+    card.isTrump = card.suit===that.trumpSuit ? true : false;
+    });
+    
   that.lastCard =  shuffledDeck[shuffledDeck.length-1];
   that.cards = shuffledDeck;
   that.talon = _.map(shuffledDeck);
