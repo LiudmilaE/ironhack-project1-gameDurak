@@ -10,6 +10,7 @@ function GameDurak(num) {
 }
 
 GameDurak.prototype.startGame = function () {
+  var that=this;//GameDurak instance
   //The deck is shuffled, and each player receives six cards.
   this.deck._creatDeck();
   this.deck._shuffleDeck();
@@ -18,13 +19,19 @@ GameDurak.prototype.startGame = function () {
   this.player2._receiveCards(this.deck._cardsToBeReceived(6));
 
   //The player with the lowest trump is the first attacker.
-  if(this.player1.cardsTrump.length !== 0 && this.player2.cardsTrump.length === 0){
-    this.attacker = this.player1;
-  } else if(this.player1.cardsTrump.length === 0 && this.player2.cardsTrump.length !== 0) {
-    this.attacker = this.player2;
-  } else {
-    
-  }
+  this.attacker = function(){
+    if(that.player1.cardsTrump.length !== 0 && that.player2.cardsTrump.length === 0){
+      return that.player1;
+    } else if(that.player1.cardsTrump.length === 0 && that.player2.cardsTrump.length !== 0) {
+      return that.player2;
+    } else {
+      var lT1 = _.minBy(that.player1.cardsTrump, function(c) { return c.strength; });
+      var lT2 = _.minBy(that.player2.cardsTrump, function(c) { return c.strength; });
+        return lT1.strength < lT2.strength ? that.player1 : that.player2 ;
+    }
+  }();/////---var attacker end
+
+
   /*The remainder of the deck is then placed
    on top of the revealed card at a 90 degree angle, so that it remains visible,
     forming a draw pile called the prikup ("talon").
