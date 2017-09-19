@@ -14,7 +14,6 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
   this.deck._creatDeck();
   this.deck._shuffleDeck();
 
-
   for (var p=1; p<= numberOfPlayers; p++){
     var player = new Player("Incognito"+p);
     that.players.push(player);
@@ -34,7 +33,6 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
       console.log("Not possible to start game. Nobody can attack. Try to start game again!");
     }
   ///////////////////////
-
 
   //The player with the lowest trump is the first attacker.
   // The player to the attacker's left is always the defender.

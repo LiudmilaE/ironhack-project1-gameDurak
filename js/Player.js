@@ -18,14 +18,28 @@ function Player(name){
  };
 
 
-
-Player.prototype.attack = function (card) {
- return this.cards[card];
+//TODO
+Player.prototype.attack = function (plCards) {
+  if(this.isAttaker){
+    if(plCards.length===1){
+      this.playedCards = _.concat(this.playedCards, plCards);
+    } else if(_.every(plCards, 'rank')){
+      this.playedCards = _.concat(this.playedCards, plCards);
+    } else {
+      console.log("Illigal move. Cards should be of the same rank");
+    }
+  } else {
+    return false;
+  }
 };
 
 
 //TODO isStronger
 Player.prototype.defense = function (i) {
+  if(this.isDefender){
   if (this.cards[i].isStronger){
     return this.cards[i];}
+  } else {
+    return false;
+  }
 };
