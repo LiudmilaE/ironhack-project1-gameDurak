@@ -24,7 +24,7 @@ function Deck(){
   var newDeck =[];
   var ranks =["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   //in rank array index=j will show the strength of card
-  var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
+  var suits = ["clubs", "diams", "hearts", "spades"]; ///as in html // <!--&hearts; &spades; &clubs; or &diams-->
   var i, j, index=0;
     for (i = 0; i < suits.length; i++) {
         for (j = 0; j < ranks.length; j++) {
@@ -32,6 +32,12 @@ function Deck(){
             index++;
         }
     }
+    // <!--&hearts; &spades; &clubs; or &diams-->
+    _.forEach(newDeck, function(c) {
+      var color = c.suit==='diams' || c.suit==='hearts'? 'red' : 'black';
+      c.html = '<section class="card '+color+'"><p class="top"><span>'+c.rank+
+      '<br>&'+c.suit+';</span></p><h2>&'+c.suit+';</h2><p class="bottom"><span>&'+c.suit+';<br>'+c.rank+'</span></p></section>';
+    });
     that.cards = newDeck;
 };
 

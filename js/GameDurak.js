@@ -4,8 +4,7 @@ function GameDurak() {
   this.gameOver = false;
   //change each turn //use _.flatten(array)
   this.currPlayedCards = [[],  //cards to attack
-                               []]; //cards to defend
-
+                          []]; //cards to defend
 }
 
 //The game is typically played with two to five people (because of recieve method of 6 cards)
@@ -81,6 +80,10 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
   }
 };
 
+// GameDurak.prototype.chooseCard = function () {
+//   return card;
+// };
+
 //TODO
 GameDurak.prototype.gamePlayTurn = function () {
   var that=this;
@@ -99,7 +102,6 @@ GameDurak.prototype.gamePlayTurn = function () {
   if (defendedCard){
     that.currPlayedCards[1].push(defendedCard);
   }
-
 
   // At any point during a defense, all players other than the defender can add extra attacking cards,
   // provided that for each new attacking card, there is already a card of the same rank on the table (either defending or attacking),
