@@ -40,7 +40,7 @@ Player.prototype.attack = function(card, currCards) {
 };
 
 
-//TODO check if isStrongerCard??
+
 // The defender attempts to beat the attacking cards by playing higher-valued defending cards from their hand.
 // One card is played to defend against each attacking card, and it must be in the attacking card's suit or the trump suit.
 Player.prototype.defense = function (card, attCard) {

@@ -1,6 +1,9 @@
 # ironhack-project1-gameDurak
 This is a repo to practice in creating working game in browser as my first project during Ironhack Bootcamp
 
+
+
+
 DURAK (Russian: Дурак; IPA: [dʊˈrak] (About this sound listen), "fool")
  is a card game that is popular in post-Soviet states.
 
@@ -35,6 +38,6 @@ At the end of each turn, whether or not the defense was successful, each player 
 
 WINNING AND LOSING
 The last person left with cards in their hand is the loser (the fool or "durak").
-In this variant of game durak there are no winners, only the loser.
+This variant of game declares the winner of the round to be the first player to exhaust their hand and leave
 
 More information: https://en.wikipedia.org/wiki/Durak
