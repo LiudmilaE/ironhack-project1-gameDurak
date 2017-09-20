@@ -38,6 +38,6 @@ At the end of each turn, whether or not the defense was successful, each player 
 
 WINNING AND LOSING
 The last person left with cards in their hand is the loser (the fool or "durak").
-This variant of game declares the winner of the round to be the first player to exhaust their hand and leave
+This variant of game declares the winner of the round to be the first player to exhaust his or her cards and leave.
 
 More information: https://en.wikipedia.org/wiki/Durak
