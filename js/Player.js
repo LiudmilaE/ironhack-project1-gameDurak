@@ -34,14 +34,25 @@ Player.prototype.attack = function(card, currAttackedCards) {
 };
 
 
-//TODO check if isStronger??
-Player.prototype.defense = function (i) {
-  if(this.isDefender){
-  if (this.cards[i].isStronger){
-    return this.cards[i];}
-  } else {
-    return false;
+//TODO check if isStrongerCard??
+// The defender attempts to beat the attacking cards by playing higher-valued defending cards from their hand.
+// One card is played to defend against each attacking card, and it must be in the attacking card's suit or the trump suit.
+Player.prototype.defense = function (card, attackingCard) {
+  var arr = [];
+  if(!this.isDefender){
+    console.log("Illegal move!You are not a defender! You should attack!");
+    return;
   }
 
-  return arr;
+  function isStrongerCard(def,att){
+    return (def.isTrump && !att.isTrump) || (def.suit===att.suit && def.strength > att.strength);
+    }
+
+  if (card.isStrongerCard){
+    arr = _.concat(arr, card);
+    return arr;
+  } else {
+    console.log("Defense is not successfull!");
+    return false;
+  }
 };
