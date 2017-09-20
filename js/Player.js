@@ -1,5 +1,3 @@
-//The game is typically played with two to five people (because of recieve method of 6 cards)
-
 function Player(name){
   this.name = name;
   this.cards = [];
@@ -18,16 +16,16 @@ function Player(name){
  };
 
 
-//TODO
 Player.prototype.attack = function(card, currAttackedCards) {
   var arr = currAttackedCards;
   if(this.isDefender){
       console.log("Illegal move! You can't attack! You should defend yourself!");
       return;
     }
-
   if (arr.length===0 || _.includes(arr, card.rank)){
     arr = _.concat(arr, card);
+    this.cards = _.filter(this.cards, function(c){return  !(c.rank === card.rank && c.suit === card.suit);});
+    this.cardsTrump = _.filter(this.cardsTrump, function(c){return !(c.rank === card.rank && c.suit === card.suit);});
     return arr;
   } else {
     console.log("Illegal move! You can't attack! Your card should be of the same rank as currently played cards");

@@ -8,16 +8,19 @@ function GameDurak() {
 
 }
 
+//The game is typically played with two to five people (because of recieve method of 6 cards)
+// In theory the limit for a game with one deck of 36 cards is six players,
+// but this gives a considerable advantage to the player who attacks first,
+// and a considerable disadvantage to the player who defends first.
 GameDurak.prototype.startGame = function (numberOfPlayers) {
-  if (numberOfPlayers>6) {
-    numberOfPlayers=6;
-    console.log("Maximum only 6 players!!!");
+  if (numberOfPlayers>5) {
+    numberOfPlayers=5;
+    console.log("Maximum only 5 players!!!");
   }
   var that=this;//GameDurak instance
   //The deck is shuffled, and each player receives six cards.
   this.deck._creatDeck();
   this.deck._shuffleDeck();
-
   for (var p=1; p<= numberOfPlayers; p++){
     var player = new Player("Incognito"+p);
     that.players.push(player);
@@ -40,34 +43,35 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
 
   //The player with the lowest trump is the first attacker.
   // The player to the attacker's left is always the defender.
- function isFirstAttackerVsDefender(players){
-   var lowestTrumps = [];
-   players.forEach(function(p){
-      var lowT = _.minBy(p.cardsTrump, function(c) { return c.strength; });
-      if (lowT===undefined){
-        lowestTrumps.push(100);//that is more than valid strength's values -> from 0 to 8
-      } else {
-        lowestTrumps.push(lowT);
-      }
-   });
-   console.log (lowestTrumps);
-   if (_.every(lowestTrumps, 100)){
-     console.log("Is not possible to start the game, because no one received any trump!!!");
-     return;
-   } else{
-   var attackerIndex = _.indexOf(lowestTrumps, _.minBy(lowestTrumps,function(c) { return c.strength; }));
-   that.players[attackerIndex].isAttacker = true;
-   that.nextPlayerToTheLeft(attackerIndex).isDefender = true;
-  }
+   function isFirstAttackerVsDefender(players){
+     var lowestTrumps = [];
+     players.forEach(function(p){
+        var lowT = _.minBy(p.cardsTrump, function(c) { return c.strength; });
+        if (lowT===undefined){
+          lowestTrumps.push(100);//that is more than valid strength's values -> from 0 to 8
+        } else {
+          lowestTrumps.push(lowT);
+        }
+     });
+     //console.log (lowestTrumps);
+     if (_.every(lowestTrumps, 100)){
+       console.log("Is not possible to start the game, because no one received any trump!!!");
+       return;
+     } else{
+     var attackerIndex = _.indexOf(lowestTrumps, _.minBy(lowestTrumps,function(c) { return c.strength; }));
+     that.players[attackerIndex].isAttacker = true;
+     that.nextPlayerToTheLeft(attackerIndex).isDefender = true;
+    }
  }
-  /*The remainder of the deck is then placed
-   on top of the revealed card at a 90 degree angle, so that it remains visible,
-    forming a draw pile called the prikup ("talon").
-    The revealed card remains part of the talon and is drawn as the last card.
-    Cards discarded due to successful defenses are placed in a discard pile
-    next to the talon.*/
 };
 /////////////////////////end of startGame method
+
+/*The remainder of the deck is then placed
+ on top of the revealed card at a 90 degree angle, so that it remains visible,
+  forming a draw pile called the prikup ("talon").
+  The revealed card remains part of the talon and is drawn as the last card.
+  Cards discarded due to successful defenses are placed in a discard pile
+  next to the talon.*/
 
 GameDurak.prototype.nextPlayerToTheLeft = function(index) {
   if(index===(this.players.length-1)) {
@@ -75,6 +79,16 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
   } else {
     return this.players[index+1];
   }
+};
+
+GameDurak.prototype.gamePlayTurn = function () {
+  var that=this;
+  var attInd = _.findIndex(that.players, 'isAttacker');
+  var attacker = that.players[attInd];
+  var cardIndex; ///where to take index???? event onclick
+  that.currPlayedCards[0] = attacker.attack(attacker.cards[cardInd], that.currPlayedCards[0]);
+  //game.currPlayedCards[0] = game.players[0].attack(game.players[0].cards[1], game.currPlayedCards[0]);
+
 };
 
 GameDurak.prototype.changeTurn = function () {
