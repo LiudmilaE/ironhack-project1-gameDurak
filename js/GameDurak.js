@@ -81,16 +81,25 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
   }
 };
 
+//TODO
 GameDurak.prototype.gamePlayTurn = function () {
   var that=this;
   var attInd = _.findIndex(that.players, 'isAttacker');
   var attacker = that.players[attInd];
   var cardIndex; ///where to take index???? event onclick
-  that.currPlayedCards[0] = attacker.attack(attacker.cards[cardInd], that.currPlayedCards[0]);
+  // function chosedCard(card) {
+  //   return card;
+  // }
+
+  that.currPlayedCards[0] = attacker.attack(attacker.cards[cardIndex], that.currPlayedCards);
   //game.currPlayedCards[0] = game.players[0].attack(game.players[0].cards[1], game.currPlayedCards[0]);
+  var defInd = _.findIndex(that.players, 'isDefender');
+  var defender = that.players[defInd];
+  var defendedCard = defender.defend(defCard, _.last(this.currPlayedCards[0]));
+  if (defendedCard){
+    that.currPlayedCards[1].push(defendedCard);
+  }
 
-
-  
 
   // At any point during a defense, all players other than the defender can add extra attacking cards,
   // provided that for each new attacking card, there is already a card of the same rank on the table (either defending or attacking),
@@ -99,7 +108,6 @@ GameDurak.prototype.gamePlayTurn = function () {
   //  If at any point multiple players wish to add cards simultaneously, the first attacker has first priority,
   //   then the player to defender's left, and so forth clockwise.
   // This variant of game durak only allows cards to be added to the attack once the first defending card has been played.
-
 };
 
 GameDurak.prototype.changeTurn = function () {
