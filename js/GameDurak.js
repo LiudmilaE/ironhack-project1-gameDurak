@@ -2,6 +2,10 @@ function GameDurak() {
   this.deck = new Deck();//cards, talon, trump, lastCard
   this.players = [];
   this.gameOver = false;
+  //change each turn //use _.flatten(array)
+  this.currPlayedCards = [[],  //cards to attack
+                               []]; //cards to defend
+
 }
 
 GameDurak.prototype.startGame = function (numberOfPlayers) {

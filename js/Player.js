@@ -19,22 +19,24 @@ function Player(name){
 
 
 //TODO
-Player.prototype.attack = function (plCards) {
-  if(this.isAttaker){
-    if(plCards.length===1){
-      this.playedCards = _.concat(this.playedCards, plCards);
-    } else if(_.every(plCards, 'rank')){
-      this.playedCards = _.concat(this.playedCards, plCards);
-    } else {
-      console.log("Illigal move. Cards should be of the same rank");
+Player.prototype.attack = function(card, currAttackedCards) {
+  var arr = currAttackedCards;
+  if(this.isDefender){
+      console.log("Illegal move! You can't attack! You should defend yourself!");
+      return;
     }
+
+  if (arr.length===0 || _.includes(arr, card.rank)){
+    arr = _.concat(arr, card);
+    return arr;
   } else {
-    return false;
+    console.log("Illegal move! You can't attack! Your card should be of the same rank as currently played cards");
+    return;
   }
 };
 
 
-//TODO isStronger
+//TODO check if isStronger??
 Player.prototype.defense = function (i) {
   if(this.isDefender){
   if (this.cards[i].isStronger){
@@ -42,4 +44,6 @@ Player.prototype.defense = function (i) {
   } else {
     return false;
   }
+
+  return arr;
 };
