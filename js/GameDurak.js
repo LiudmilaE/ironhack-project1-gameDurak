@@ -84,7 +84,7 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
 
 //TODO
  GameDurak.prototype.isDefenceSucceded = function () {
-   
+
  };
 
 //TODO
