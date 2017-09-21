@@ -49,7 +49,11 @@ h4 {
 }
 
 #playing-cards col{
- height: 150px;
+ height: 160px;
+}
+
+#attCard, #deffCard {
+  height: 200px;
 }
 
 #discard-pile {
@@ -71,7 +75,7 @@ h4 {
   background-color: #339900;
   margin-left: auto;
   margin-right: auto;
-  height: 600px;
+  height: 640px;
 
           box-shadow: 5px 10px 10px 15px #26273c;
      -moz-box-shadow: 5px 10px 10px 15px #26273c;
@@ -134,4 +138,13 @@ h4 {
 .bottom{
   text-align: right;
   transform: translateX(78px) rotate(0.5turn);
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute-d {
+  position: absolute;
+  top: 45px;
 }
