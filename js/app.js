@@ -26,39 +26,32 @@ $(document).ready(function(){
     });
   }
 
-
-
-
-///Show/Hide Cards
-
-function ShowHidePlayer0() {
-  game.players[0].cards.forEach(function(el,j){
-    $("#p0c"+j+" > section").toggleClass("hide-card");
+///Show/Hide Cards Buttons
+  $("#btn-p0").click(function ShowHidePlayer0() {
+    game.players[0].cards.forEach(function(el,j){
+      $("#p0c"+j+" > section").toggleClass("hide-card");
+    });
   });
-}
-
-function ShowHidePlayer1() {
-  game.players[1].cards.forEach(function(el,j){
-    $("#p1c"+j+" > section").toggleClass("hide-card");
+  $("#btn-p1").click(function ShowHidePlayer1() {
+    game.players[1].cards.forEach(function(el,j){
+      $("#p1c"+j+" > section").toggleClass("hide-card");
+    });
   });
-}
 
-  $("#btn-p0").click(ShowHidePlayer0);
-
-  $("#btn-p1").click(ShowHidePlayer1);
 
   ///TODO attack vs defense
+  //player 2
   $("#p1cards").click(function(event) {
     var cardId = event.target.id;
-    console.log(event.target);
+    // console.log(event.target);
     var arr = cardId.split("-");
     var card = _.filter(game.players[1].cards, function(c){return (c.rank === arr[0] && c.suit === arr[1]);});
     //console.log(card);
     if(game.players[1].isAttacker && game.canAttack){
-      game.players[1].attack(card[0], game.currPlayedCards);
+      var legalAttack =  game.players[1].attack(card[0], game.currPlayedCards);
+      game.currPlayedCards[0] = _.concat(game.currPlayedCards[0], legalAttack);
       $(event.target).detach();
-      // $(event.target).parent().detach();
-      // $(event.target).parent().appendTo("#p1cards");
+
       $(event.target).appendTo("#attCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
@@ -68,10 +61,10 @@ function ShowHidePlayer1() {
 
     }
     if(game.players[1].isDefender && game.canAttack){
-      game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
+      var legalDef = game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
+      game.currPlayedCards[1] = _.concat(game.currPlayedCards[1], legalDef);
       $(event.target).detach();
-      // $(event.target).parent().detach();
-      // $(event.target).parent().appendTo("#p1cards");
+
       $(event.target).appendTo("#defCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
@@ -81,18 +74,18 @@ function ShowHidePlayer1() {
     }
   });
 
+
+//player1
   $("#p0cards").click(function(event) {
     var cardId = event.target.id;
-    console.log(event.target);
-
+    // console.log(event.target);
     var arr = cardId.split("-");
     var card = _.filter(game.players[0].cards, function(c){return (c.rank === arr[0] && c.suit === arr[1]);});
     //console.log(card);
     if(game.players[0].isAttacker && game.canAttack){
-      game.players[0].attack(card[0], game.currPlayedCards);
+      var legalAttack = game.players[0].attack(card[0], game.currPlayedCards);
+      game.currPlayedCards[0] = _.concat(game.currPlayedCards[0], legalAttack);
       $(event.target).detach();
-      // $(event.target).parent().detach();
-      // $(event.target).parent().appendTo("#p0cards");
       $(event.target).appendTo("#attCard");
       $("#p0cards > div:last-child").html("");
       restartCards();
@@ -101,10 +94,9 @@ function ShowHidePlayer1() {
       $("#btn-p1").removeClass("hide");
     }
     if(game.players[0].isDefender && game.canAttack){
-      game.players[0].defense(card[0], game.currPlayedCards[0][game.currPlayedCards[0].length-1]);
+      var legalDef = game.players[0].defense(card[0], game.currPlayedCards[0][game.currPlayedCards[0].length-1]);
+      game.currPlayedCards[1] = _.concat(game.currPlayedCards[1], legalDef);
       $(event.target).detach();
-      // $(event.target).parent().detach();
-      // $(event.target).parent().appendTo("#p0cards");
       $(event.target).appendTo("#defCard");
       $("#p0cards > div:last-child").html("");
       restartCards();

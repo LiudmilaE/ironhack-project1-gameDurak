@@ -119,6 +119,10 @@ GameDurak.prototype.gamePlayTurn = function () {
 };
 /////////////////////////////////////////////////////
 
+
+
+
+
 GameDurak.prototype.changeTurn = function () {
   var that = this;
   if(that.isGameOver()){

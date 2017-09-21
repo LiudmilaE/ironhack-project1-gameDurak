@@ -12,7 +12,6 @@ function Player(name){
     this.cardsTrump = _.filter(this.cards, function(card) { return card.isTrump; });
     return this.cards;
   }
-
   return false;
  };
 
@@ -52,7 +51,7 @@ Player.prototype.defense = function (card, attCard) {
 
   function isStrongerCard(def,att){
     return (def.isTrump && !att.isTrump) || (def.suit===att.suit && def.strength > att.strength);
-    }
+  }
 
   if (isStrongerCard(card, attCard)){
     // arr = _.concat(arr, card);
