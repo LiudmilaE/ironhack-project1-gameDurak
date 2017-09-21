@@ -60,6 +60,7 @@ function ShowHidePlayer1() {
       // $(event.target).parent().detach();
       // $(event.target).parent().appendTo("#p1cards");
       $(event.target).appendTo("#attCard");
+      $("#p1cards > div:last-child").html("");
       restartCards();
       // ShowHidePlayer1();
       $("#btn-p1").addClass("hide");
@@ -72,6 +73,7 @@ function ShowHidePlayer1() {
       // $(event.target).parent().detach();
       // $(event.target).parent().appendTo("#p1cards");
       $(event.target).appendTo("#defCard");
+      $("#p1cards > div:last-child").html("");
       restartCards();
       // ShowHidePlayer1();
       $("#btn-p1").addClass("hide");
@@ -92,6 +94,7 @@ function ShowHidePlayer1() {
       // $(event.target).parent().detach();
       // $(event.target).parent().appendTo("#p0cards");
       $(event.target).appendTo("#attCard");
+      $("#p0cards > div:last-child").html("");
       restartCards();
       // ShowHidePlayer0();
       $("#btn-p0").addClass("hide");
@@ -103,6 +106,7 @@ function ShowHidePlayer1() {
       // $(event.target).parent().detach();
       // $(event.target).parent().appendTo("#p0cards");
       $(event.target).appendTo("#defCard");
+      $("#p0cards > div:last-child").html("");
       restartCards();
       // ShowHidePlayer0();
       $("#btn-p0").addClass("hide");
