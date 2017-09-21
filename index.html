@@ -2,16 +2,101 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Game Durak</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen">
   </head>
   <body>
-    <div id='table'>
-      <h1>Game Durak</h1>
+    <h1>Game Durak</h1>
+    <button type="button" class="btn btn-outline-success btn-lg" id="start-game">START GAME</button>
+    <div class="container" id="table">
 
+      <article class="row">
+        <div class="col-2" id="trump-talon">
+          <h4>Trump</h4>
+          <div class="card-placeholder" id="trump"></div>
+
+          <h4>Talon</h4>
+          <div class="card-placeholder" id="talon"></div>
+        </div>
+
+
+        <div class="col-8" id="playing-cards">
+          <div class="row align-items-start">
+            <div class="col">
+              <h4>Player1's cards</h4>
+              <div class="row" id="p1cards">
+                <div class="col card-placeholder" id="p1c0"></div>
+                <div class="col card-placeholder" id="p1c1"></div>
+                <div class="col card-placeholder" id="p1c2"></div>
+                <div class="col card-placeholder" id="p1c3"></div>
+                <div class="col card-placeholder" id="p1c4"></div>
+                <div class="col card-placeholder" id="p1c5"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center">
+
+            <div class="col">
+              <h4>Currently playing cards</h4>
+
+
+              <article class="row">
+                   <div class="col">
+                     <div class="card-placeholder" id="attCard">
+
+                     </div>
+
+                    </div>
+                    <div class="col">
+                      <div class="card-placeholder" id="defCard">
+
+                      </div>
+                    </div>
+
+              </article>
+            </div>
+          </div>
+
+          <div class="row align-items-end ">
+
+            <div class="col">
+              <h4>Player2's cards</h4>
+              <div class="row" id="p2cards">
+                <div class="col card-placeholder" id="p2c0">
+
+                </div>
+                <div class="col card-placeholder" id="p2c1">
+
+                </div>
+                <div class="col card-placeholder" id="p2c2">
+
+                </div>
+                <div class="col card-placeholder" id="p2c3">
+
+                </div>
+                <div class="col card-placeholder" id="p2c4">
+
+                </div>
+                <div class="col card-placeholder" id="p2c5">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+        <section class="col-2 align-items-center" id="discard-pile">
+          <h4>Discard Pile</h4>
+          <div class="card-placeholder" id="pile"></div>
+        </section>
+      </article>
     </div>
-
 
 <!--&hearts; &spades; &clubs; or &diams
     <section class="card red">
