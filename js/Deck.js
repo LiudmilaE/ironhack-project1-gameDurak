@@ -35,8 +35,8 @@ function Deck(){
     // <!--&hearts; &spades; &clubs; or &diams-->
     _.forEach(newDeck, function(c) {
       var color = c.suit==='diams' || c.suit==='hearts'? 'red' : 'black';
-      c.html = '<section class="card '+color+'"><p class="top"><span>'+c.rank+
-      '<br>&'+c.suit+';</span></p><h2>&'+c.suit+';</h2><p class="bottom"><span>&'+c.suit+';<br>'+c.rank+'</span></p></section>';
+      c.html = '<section class="card '+color+'" id="'+c.rank+"-"+c.suit+'"><p class="top"><span>'+c.rank+
+      '<br> &'+c.suit+';</span></p><h2>&'+c.suit+';</h2><p class="bottom"><span> &'+c.suit+';</span><span> '+c.rank+'</span></p></section>';
     });
     that.cards = newDeck;
 };

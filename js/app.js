@@ -23,22 +23,73 @@ $(document).ready(function(){
   });
 
 
+
+
 ///Show/Hide Cards
-  $("#btn-p0").click(function() {
-    game.players[0].cards.forEach(function(el,j){
-      $("#p0c"+j+" > section").toggleClass("hide-card");
-    });
+
+function ShowHidePlayer0() {
+  game.players[0].cards.forEach(function(el,j){
+    $("#p0c"+j+" > section").toggleClass("hide-card");
+  });
+}
+
+function ShowHidePlayer1() {
+  game.players[1].cards.forEach(function(el,j){
+    $("#p1c"+j+" > section").toggleClass("hide-card");
+  });
+}
+
+  $("#btn-p0").click(ShowHidePlayer0);
+
+  $("#btn-p1").click(ShowHidePlayer1);
+
+  ///TODO attack vs defense
+  $("#p1cards").click(function(event) {
+    var cardId = event.target.id;
+    //console.log(event.target);
+    var arr = cardId.split("-");
+    var card = _.filter(game.players[1].cards, function(c){return (c.rank === arr[0] && c.suit === arr[1]);});
+    //console.log(card);
+    if(game.players[1].isAttacker && game.canAttack){
+      game.players[1].attack(card[0], game.currPlayedCards);
+      $(event.target).detach();
+      $(event.target).appendTo("#attCard");
+      ShowHidePlayer1();
+      $("#btn-p1").addClass("hide");
+      $("#btn-p0").removeClass("hide");
+    }
+    if(game.players[1].isDefender && game.canAttack){
+      game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
+      $(event.target).detach();
+      $(event.target).appendTo("#defCard");
+      ShowHidePlayer1();
+      $("#btn-p1").addClass("hide");
+      $("#btn-p0").removeClass("hide");
+    }
   });
 
-  $("#btn-p1").click(function() {
-    game.players[1].cards.forEach(function(el,j){
-      $("#p1c"+j+" > section").toggleClass("hide-card");
-    });
-  });
-
-  ///TODO attack vs defence
-  $( "#p1cards, #p0cards" ).click(function() {
-    
+  $("#p0cards").click(function(event) {
+    var cardId = event.target.id;
+    //console.log(event.target);
+    var arr = cardId.split("-");
+    var card = _.filter(game.players[0].cards, function(c){return (c.rank === arr[0] && c.suit === arr[1]);});
+    //console.log(card);
+    if(game.players[0].isAttacker && game.canAttack){
+      game.players[0].attack(card[0], game.currPlayedCards);
+      $( event.target ).detach();
+      $(event.target).appendTo("#attCard");
+      ShowHidePlayer0();
+      $("#btn-p0").addClass("hide");
+      $("#btn-p1").removeClass("hide");
+    }
+    if(game.players[0].isDefender && game.canAttack){
+      game.players[0].defense(card[0], game.currPlayedCards[0][game.currPlayedCards[0].length-1]);
+      $(event.target).detach();
+      $(event.target).appendTo("#defCard");
+      ShowHidePlayer0();
+      $("#btn-p0").addClass("hide");
+      $("#btn-p1").removeClass("hide");
+    }
   });
 
 

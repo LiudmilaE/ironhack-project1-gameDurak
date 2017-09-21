@@ -92,6 +92,9 @@ GameDurak.prototype.gamePlayTurn = function () {
   var that=this;
   var attInd = _.findIndex(that.players, 'isAttacker');
   var attacker = that.players[attInd];
+  // while(canAttack()){
+  //
+  // }
   var cardIndex; ///where to take index???? event onclick
   // function chosedCard(card) {
   //   return card;

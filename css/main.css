@@ -21,7 +21,9 @@ h1 {
   display: none;
 }
 
-
+.clickable {
+  cursor: pointer;
+}
 
 #start-game {
   position: absolute;
@@ -99,6 +101,10 @@ h4 {
   -webkit-margin-before: 0;
 }
 
+.card * {
+  pointer-events: none;
+}
+
 .card{
   width: 110px;
   height: 138px;
@@ -127,4 +133,5 @@ h4 {
 }
 .bottom{
   text-align: right;
+  transform: translateX(78px) rotate(0.5turn);
 }
