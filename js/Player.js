@@ -17,9 +17,8 @@ function Player(name){
 
 
 Player.prototype.attack = function(card, currCards) {
-  var arr = currCards[0]; //attackedCards
+  // var arr = [];
   var allCurrCards = _.flatten(currCards); //all played cards
-
   if(this.isDefender){
       console.log("Illegal move! You can't attack! You should defend yourself!");
       return;
@@ -27,11 +26,11 @@ Player.prototype.attack = function(card, currCards) {
 
  //At any point during a defense, all players other than the defender can add extra attacking cards,
  //provided that for each new attacking card, there is already a card of the same rank on the table (either defending or attacking)
-  if (arr.length===0 || _.includes(allCurrCards, card.rank)){
-    arr = _.concat(arr, card);
+  if (currCards[0].length===0 || _.includes(allCurrCards, card.rank)){
+    // arr = _.concat(arr, card);
     this.cards = _.filter(this.cards, function(c){return  !(c.rank === card.rank && c.suit === card.suit);});
     this.cardsTrump = _.filter(this.cardsTrump, function(c){return !(c.rank === card.rank && c.suit === card.suit);});
-    return arr;
+    return card;//arr
   } else {
     console.log("Illegal move! You can't attack! Your card should be of the same rank as currently played cards");
     return;
@@ -55,6 +54,8 @@ Player.prototype.defense = function (card, attCard) {
 
   if (isStrongerCard(card, attCard)){
     // arr = _.concat(arr, card);
+    this.cards = _.filter(this.cards, function(c){return  !(c.rank === card.rank && c.suit === card.suit);});
+    this.cardsTrump = _.filter(this.cardsTrump, function(c){return !(c.rank === card.rank && c.suit === card.suit);});
     return card;
   } else {
     console.log("Defense is not successfull!");
