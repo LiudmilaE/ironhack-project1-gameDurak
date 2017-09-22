@@ -6,6 +6,7 @@ function GameDurak() {
   this.currPlayedCards = [[],  //cards to attack
                           []]; //cards to defend
   this.discardPile = [];
+  this.isDefenceSucceded = false;
 }
 
 //The game is typically played with two to five people (because of recieve method of 6 cards)
@@ -19,17 +20,15 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
   }
   var that=this;//GameDurak instance
   //The deck is shuffled, and each player receives six cards.
-  this.deck._creatDeck();
-  this.deck._shuffleDeck();
+  that.deck._creatDeck();
+  that.deck._shuffleDeck();
   for (var p=1; p<= numberOfPlayers; p++){
     var player = new Player("Incognito"+p);
     that.players.push(player);
   }
-  that.players.forEach(function(el){
-    var cards = that.deck._cardsToBeReceived(6);
-    that.deck.receivedCards = _.concat(that.deck.receivedCards, cards);
-    el._receiveCards(cards);
-  });
+
+  that.drawCards();
+
   ////possible to start only if at least one player has one trump
     //that.deck.receivedCards = _.slice(that.deck.cards,0, numberOfPlayers*6);
     var checkTrump = _.filter(that.deck.receivedCards, function(card) { return card.isTrump; });
@@ -39,6 +38,7 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
       console.log("Not possible to start game. Nobody can attack. Try to start game again!");
     }
   ///////////////////////
+
   //The player with the lowest trump is the first attacker.
   // The player to the attacker's left is always the defender.
    function isFirstAttackerVsDefender(players){
@@ -71,6 +71,27 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
   Cards discarded due to successful defenses are placed in a discard pile
   next to the talon.*/
 
+
+//works only for 2 players (and when defense is successfull)=fixed?
+  GameDurak.prototype.drawCards = function (){
+    var that=this;//GameDurak instance
+    var num = 0;
+    that.players.forEach(function(el){
+      if (el.cards.length===0){
+        num = 6;
+      } else {
+        if(el.cards.length>0 && that.deck.talon.length === (6-el.cards.length)){
+          num = 6-el.cards.length;
+        } else {
+          num = that.deck.talon.length;
+        }
+      }
+      var cards = that.deck._cardsToBeReceived(num);
+      that.deck.receivedCards = _.concat(that.deck.receivedCards, cards);
+      el._receiveCards(cards);
+    });
+    };
+
 GameDurak.prototype.nextPlayerToTheLeft = function(index) {
   if(index===(this.players.length-1)) {
     return this.players[0];
@@ -84,16 +105,45 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
    return _.find(this.players, 'isDefender').cards.length!==0 && ( _.includes(allCurrCards, card.rank)) ; //(this.currPlayedCards[0].length===0 ||)
  };
 
-//TODO
- GameDurak.prototype.isDefenceSucceded = function () {
-   if (this.players[0].isDefender && !this.canAttack()){
-
+ GameDurak.prototype.changeTurn = function () {
+   var that = this;
+   if(that.isGameOver()){
+     console.log("GAME OVER!!!");
+     return;
    }
-   if (this.players[1].isDefender && !this.canAttack()){
-
-   }
+   /*After each turn play proceeds clockwise.
+   If the attack succeeds, the defender loses their turn
+   and the attack passes to the player on the defender's left.
+   If the attack fails, the defender becomes the next attacker.*/
+   var attInd = _.findIndex(that.players, 'isAttacker');
+   var defInd = _.findIndex(that.players, 'isDefender');
+   that.players[attInd].isAttacker=false;
+   that.players[defInd].isDefender=false;
+   var ind = that.isDefenceSucceded ? attInd : defInd;
+   that.nextPlayerToTheLeft(ind).isAttacker = true;
+   that.nextPlayerToTheLeft(_.findIndex(that.players, 'isAttacker')).isDefender = true;
 
  };
+
+ GameDurak.prototype.isGameOver = function () {
+   //works only for 2 players
+   return this.deck.talon.length===0 && ((this.players[0].cards.length===0) || (this.players[1].cards.length===0));
+ };
+
+
+
+
+
+//TODO
+ // GameDurak.prototype.isDefenceSucceded = function () {
+ //   if (this.players[0].isDefender && !this.canAttack()){
+ //
+ //   }
+ //   if (this.players[1].isDefender && !this.canAttack()){
+ //
+ //   }
+ //
+ // };
 
 //TODO
 // GameDurak.prototype.gamePlayTurn = function () {
@@ -126,32 +176,3 @@ GameDurak.prototype.nextPlayerToTheLeft = function(index) {
 //   // This variant of game durak only allows cards to be added to the attack once the first defending card has been played.
 // };
 // /////////////////////////////////////////////////////
-
-
-
-
-
-GameDurak.prototype.changeTurn = function () {
-  var that = this;
-  if(that.isGameOver()){
-    console.log("GAME OVER!!!");
-    return;
-  }
-  /*After each turn play proceeds clockwise.
-  If the attack succeeds, the defender loses their turn
-  and the attack passes to the player on the defender's left.
-  If the attack fails, the defender becomes the next attacker.*/
-  var attInd = _.findIndex(that.players, 'isAttacker');
-  var defInd = _.findIndex(that.players, 'isDefender');
-  that.players[attInd].isAttacker=false;
-  that.players[defInd].isDefender=false;
-  var ind = that.isDefenceSucceded() ? attInd : defInd;
-  that.nextPlayerToTheLeft(ind).isAttacker = true;
-  that.nextPlayerToTheLeft(_.findIndex(that.players, 'isAttacker')).isDefender = true;
-
-};
-
-GameDurak.prototype.isGameOver = function () {
-  //works only for 2 players
-  return this.deck.talon.length===0 && ((this.players[0].cards.length===0) || (this.players[1].cards.length===0));
-};

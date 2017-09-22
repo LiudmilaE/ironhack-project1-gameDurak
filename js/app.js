@@ -1,6 +1,7 @@
 var game = new GameDurak();
 
 $(document).ready(function(){
+
   $("#start-game").click(function(){
     $("#start-game").hide();
     $("#btn-dpile").removeClass("hide");
@@ -11,10 +12,21 @@ $(document).ready(function(){
   });
 
     $("#btn-dpile").click(function(){
+      game.isDefenceSucceded = true;
+      var numCardsToDraw = game.currPlayedCards[0].length;
       var allcards = _.flatten(game.currPlayedCards);
       game.discardPile = _.concat(game.discardPile, allcards);
       game.currPlayedCards = [[],[]];
       $("#defCard, #attCard").html("");
+
+      //draw cards - receive cards -change turn
+      game.changeTurn();
+
+      game.drawCards();
+
+      //hide cards
+      restartCards();
+
     });
 
   function restartCards(){
@@ -26,6 +38,7 @@ $(document).ready(function(){
       }
       if(p.isDefender){
         $("#role"+i).text("Defender");
+        $("#btn-p"+i).addClass("hide");
       }
       p.cards.forEach(function(el,j){
         $("#p"+i+"c"+j).html(el.html);
@@ -63,7 +76,6 @@ $(document).ready(function(){
       $(event.target).appendTo("#attCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
-      // ShowHidePlayer1();
       $("#btn-p1").addClass("hide");
       $("#btn-p0").removeClass("hide");
     }
@@ -76,7 +88,6 @@ $(document).ready(function(){
       $(event.target).appendTo("#defCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
-      // ShowHidePlayer1();
       $("#btn-p1").addClass("hide");
       $("#btn-p0").removeClass("hide");
     }
@@ -97,7 +108,6 @@ $(document).ready(function(){
       $(event.target).appendTo("#attCard");
       $("#p0cards > div:last-child").html("");
       restartCards();
-      // ShowHidePlayer0();
       $("#btn-p0").addClass("hide");
       $("#btn-p1").removeClass("hide");
     }
@@ -109,7 +119,6 @@ $(document).ready(function(){
       $(event.target).appendTo("#defCard");
       $("#p0cards > div:last-child").html("");
       restartCards();
-      // ShowHidePlayer0();
       $("#btn-p0").addClass("hide");
       $("#btn-p1").removeClass("hide");
     }
