@@ -13,10 +13,8 @@ function Deck(){
   this.cards = [];
   this.talon = [];//remainderDeck - so called prikup
   this.receivedCards = [];///use to control start
-  // this.discardPile = [];
   this.trumpSuit = "diams"; //default
-  this.lastCard = {}; /*The bottom card of the remaining deck is laid open on the table.
-  This determines the trump suit.*/
+  this.lastCard = {};
 }
 
  Deck.prototype._creatDeck = function () {

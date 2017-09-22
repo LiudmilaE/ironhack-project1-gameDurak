@@ -13,7 +13,14 @@
   <body>
     <h1>Game Durak</h1>
     <button type="button" class="btn btn-outline-success btn-lg" id="start-game">START GAME</button>
+
+
     <div class="container" id="table">
+      <article class="win-sign hide" id="game-over">
+        <img src="1200x630durak.jpg" alt="image of fool's hat" class="win-image">
+        <h2>GAME OVER!!!</h2>
+        <h3 id="winner"> </h3>
+      </article>
 
       <article class="row">
         <div class="col-2" id="trump-talon">
@@ -53,7 +60,6 @@
                 <div class="col card-placeholder relative" id="attCard3"></div>
                 <div class="col card-placeholder relative" id="attCard4"></div>
                 <div class="col card-placeholder relative" id="attCard5"></div>
-
               </section>
 
               <section class="row absolute" id="defCard">
@@ -63,7 +69,6 @@
                 <div class="card-placeholder absolute-d" id="defCard3"></div>
                 <div class="card-placeholder absolute-d" id="defCard4"></div>
                 <div class="card-placeholder absolute-d" id="defCard5"></div>
-
               </section>
             </div>
           </article>
@@ -94,20 +99,13 @@
       </article>
     </div>
 
-<!--&hearts; &spades; &clubs; or &diams
-    <section class="card red">
-      <p class="top"><span>A<br>&hearts;</span></p>
-      <h2>&hearts;</h2>
-      <p class="bottom"><span>&hearts;</span><span>A</span></p>
-    </section>
-  -->
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.js"></script>
-          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-          <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-          <script type="text/javascript" src="js/Deck.js"></script>
-          <script type="text/javascript" src="js/Player.js"></script>
-          <script type="text/javascript" src="js/GameDurak.js"></script>
-          <script type="text/javascript" src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Deck.js"></script>
+    <script type="text/javascript" src="js/Player.js"></script>
+    <script type="text/javascript" src="js/GameDurak.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

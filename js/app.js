@@ -1,8 +1,10 @@
 var game = new GameDurak();
 
 $(document).ready(function(){
+  $("#table h4,p").addClass('hide');
 
   $("#start-game").click(function(){
+    $("#table h4,p").removeClass('hide');
     $("#start-game").hide();
     $("#btn-dpile").removeClass("hide");
     game.startGame(2);
@@ -52,6 +54,16 @@ $(document).ready(function(){
 
 //TODO fix when we can see this button
     $("#btn-dpile").click(function(){
+      if(game.isGameOver()){
+        console.log("GAME OVER!!!");
+        var winner = _.filter(game.players, function(c){return (c.cards.length===0);});
+        var name= winner[0].name;
+        $("#table h4,p").addClass('hide');
+        $("#game-over").removeClass('hide');
+        $("#start-game").show();
+        $("#winner").html(name+" <br>won!!!");
+        return;
+      }
       game.isDefenceSucceded = true;
       var numCardsToDraw = game.currPlayedCards[0].length;
       var allcards = _.flatten(game.currPlayedCards);
@@ -116,6 +128,12 @@ $(document).ready(function(){
   $("#p1cards").click(function(event) {
     if(game.isGameOver()){
       console.log("GAME OVER!!!");
+      var winner = _.filter(game.players, function(c){return (c.cards.length===0);});
+      var name= winner[0].name;
+      $("#table h4,p").addClass('hide');
+      $("#game-over").removeClass('hide');
+      $("#start-game").show();
+      $("#winner").html(name+" <br>won!!!");
       return;
     }
     var cardId = event.target.id;
@@ -152,6 +170,12 @@ $(document).ready(function(){
   $("#p0cards").click(function(event) {
     if(game.isGameOver()){
       console.log("GAME OVER!!!");
+      var winner = _.filter(game.players, function(c){return (c.cards.length===0);});
+      var name= winner[0].name;
+      $("#table h4,p").addClass('hide');
+      $("#game-over").removeClass('hide');
+      $("#start-game").show();
+      $("#winner").html(name+" <br>won!!!");
       return;
     }
     var cardId = event.target.id;

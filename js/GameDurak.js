@@ -35,7 +35,9 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
     if (checkTrump.length>0){
       isFirstAttackerVsDefender(that.players);
     } else {
+      //there is a really small probability of this, but when there is only 2 players it is possible
       console.log("Not possible to start game. Nobody can attack. Try to start game again!");
+      that.startGame();
     }
   ///////////////////////
 
