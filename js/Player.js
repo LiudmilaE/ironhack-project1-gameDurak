@@ -19,22 +19,21 @@ function Player(name){
 Player.prototype.attack = function(card, currCards) {
   // var arr = [];
   var allCurrCards = _.flatten(currCards); //all played cards
-  if(this.isDefender){
-      console.log("Illegal move! You can't attack! You should defend yourself!");
-      return;
-    }
-
+  // if(this.isDefender){
+  //     console.log("Illegal move! You can't attack! You should defend yourself!");
+  //     return;
+  //   }
  //At any point during a defense, all players other than the defender can add extra attacking cards,
  //provided that for each new attacking card, there is already a card of the same rank on the table (either defending or attacking)
-  if (currCards[0].length===0 || _.includes(allCurrCards, card.rank)){
+  // if (currCards[0].length===0 || _.includes(allCurrCards, card.rank)){
     // arr = _.concat(arr, card);
     this.cards = _.filter(this.cards, function(c){return  !(c.rank === card.rank && c.suit === card.suit);});
     this.cardsTrump = _.filter(this.cardsTrump, function(c){return !(c.rank === card.rank && c.suit === card.suit);});
     return card;//arr
-  } else {
-    console.log("Illegal move! You can't attack! Your card should be of the same rank as currently played cards");
-    return;
-  }
+  // } else {
+  //   console.log("Illegal move! You can't attack! Your card should be of the same rank as currently played cards");
+  //   return;
+  // }
 };
 
 
@@ -43,10 +42,10 @@ Player.prototype.attack = function(card, currCards) {
 // One card is played to defend against each attacking card, and it must be in the attacking card's suit or the trump suit.
 Player.prototype.defense = function (card, attCard) {
   // var arr = [];
-  if(!this.isDefender){
-    console.log("Illegal move!You are not a defender! You should attack!");
-    return;
-  }
+  // if(!this.isDefender){
+  //   console.log("Illegal move!You are not a defender! You should attack!");
+  //   return;
+  // }
 
   function isStrongerCard(def,att){
     return (def.isTrump && !att.isTrump) || (def.suit===att.suit && def.strength > att.strength);

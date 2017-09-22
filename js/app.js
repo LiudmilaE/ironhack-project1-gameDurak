@@ -20,7 +20,9 @@ $(document).ready(function(){
      var allcards = _.flatten(game.currPlayedCards);
      game.players[0].cards = _.concat(game.players[0].cards, allcards);
      game.currPlayedCards = [[],[]];
-     $("#defCard, #attCard").html("");
+     for(var i = 0; i<6; i++){
+       $("#attCard"+i+", #defCard"+i).html("");////TODO
+     }
      ///don't need to change roles!
      //draw cards - receive cards -change turn
      //game.changeTurn();
@@ -110,8 +112,12 @@ $(document).ready(function(){
 
 
   ///TODO attack vs defense
-  //player 2 click events
+  //player2 click events
   $("#p1cards").click(function(event) {
+    if(game.isGameOver()){
+      console.log("GAME OVER!!!");
+      return;
+    }
     var cardId = event.target.id;
     // console.log(event.target);
     var arr = cardId.split("-");
@@ -128,7 +134,6 @@ $(document).ready(function(){
       $("#btn-p1").addClass("hide");
       $("#btn-p0, #btn-p0-take").removeClass("hide");
     }
-
     if(game.players[1].isDefender && game.canAttack){
       var legalDef = game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
       var indexToAddDefCard = game.currPlayedCards[1].length;
@@ -145,6 +150,10 @@ $(document).ready(function(){
 
 //player1 click events
   $("#p0cards").click(function(event) {
+    if(game.isGameOver()){
+      console.log("GAME OVER!!!");
+      return;
+    }
     var cardId = event.target.id;
     // console.log(event.target);
     var arr = cardId.split("-");
@@ -161,7 +170,6 @@ $(document).ready(function(){
       $("#btn-p0").addClass("hide");
       $("#btn-p1, #btn-p1-take").removeClass("hide");
     }
-
     if(game.players[0].isDefender && game.canAttack){
       var legalDef = game.players[0].defense(card[0], game.currPlayedCards[0][game.currPlayedCards[0].length-1]);
       var indexToAddDefCard = game.currPlayedCards[1].length;
@@ -174,9 +182,5 @@ $(document).ready(function(){
       $("#btn-p1").removeClass("hide");
     }
   });
-
-
-
-
 
 });
