@@ -6,11 +6,16 @@ $(document).ready(function(){
     $("#start-game").hide();
     $("#btn-dpile").removeClass("hide");
     game.startGame(2);
+    $("#p1").text(game.players[1].name);
+    $("#p0").text(game.players[0].name);
+    changeRoles();
     $('#trump').replaceWith(game.deck.lastCard.html);
     $('#talon, #pile').addClass('card hide-card');////need improvement
     restartCards();
   });
 
+
+//TODO fix when we can see this button
     $("#btn-dpile").click(function(){
       game.isDefenceSucceded = true;
       var numCardsToDraw = game.currPlayedCards[0].length;
@@ -18,26 +23,35 @@ $(document).ready(function(){
       game.discardPile = _.concat(game.discardPile, allcards);
       game.currPlayedCards = [[],[]];
       $("#defCard, #attCard").html("");
-
       //draw cards - receive cards -change turn
       game.changeTurn();
-
+      changeRoles();
       game.drawCards();
-
       //hide cards
       restartCards();
-
     });
 
-  function restartCards(){
+    function changeRoles(){
     game.players.forEach(function(p,i){
-      $("#p"+i).text(p.name);
       if(p.isAttacker){
         $("#role"+i).text("Attacker");
         $("#btn-p"+i).removeClass("hide");
       }
       if(p.isDefender){
         $("#role"+i).text("Defender");
+        $("#btn-p"+i).addClass("hide");
+      }
+    });
+  }
+
+  function restartCards(){
+    $("#p0cards > div").html("");
+    $("#p1cards > div").html("");
+    game.players.forEach(function(p,i){
+      if(p.isAttacker){
+        $("#btn-p"+i).removeClass("hide");
+      }
+      if(p.isDefender){
         $("#btn-p"+i).addClass("hide");
       }
       p.cards.forEach(function(el,j){
@@ -61,7 +75,7 @@ $(document).ready(function(){
 
 
   ///TODO attack vs defense
-  //player 2
+  //player 2 click events
   $("#p1cards").click(function(event) {
     var cardId = event.target.id;
     // console.log(event.target);
@@ -72,7 +86,6 @@ $(document).ready(function(){
       var legalAttack =  game.players[1].attack(card[0], game.currPlayedCards);
       game.currPlayedCards[0] = _.concat(game.currPlayedCards[0], legalAttack);
       $(event.target).detach();
-
       $(event.target).appendTo("#attCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
@@ -84,7 +97,6 @@ $(document).ready(function(){
       var legalDef = game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
       game.currPlayedCards[1] = _.concat(game.currPlayedCards[1], legalDef);
       $(event.target).detach();
-
       $(event.target).appendTo("#defCard");
       $("#p1cards > div:last-child").html("");
       restartCards();
@@ -94,7 +106,7 @@ $(document).ready(function(){
   });
 
 
-//player1
+//player1 click events
   $("#p0cards").click(function(event) {
     var cardId = event.target.id;
     // console.log(event.target);

@@ -80,7 +80,7 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
       if (el.cards.length===0){
         num = 6;
       } else {
-        if(el.cards.length>0 && that.deck.talon.length === (6-el.cards.length)){
+        if(el.cards.length>0 && el.cards.length<6 && that.deck.talon.length>(6-el.cards.length)){
           num = 6-el.cards.length;
         } else {
           num = that.deck.talon.length;
