@@ -15,6 +15,37 @@ $(document).ready(function(){
   });
 
 
+//btn "Take" when defense is failed
+   $("#btn-p0-take").click(function(){
+     var allcards = _.flatten(game.currPlayedCards);
+     game.players[0].cards = _.concat(game.players[0].cards, allcards);
+     game.currPlayedCards = [[],[]];
+     $("#defCard, #attCard").html("");
+     ///don't need to change roles!
+     //draw cards - receive cards -change turn
+     //game.changeTurn();
+     //changeRoles();
+     game.drawCards();
+     //hide cards
+     restartCards();
+   });
+
+   $("#btn-p1-take").click(function(){
+     var allcards = _.flatten(game.currPlayedCards);
+     game.players[1].cards = _.concat(game.players[1].cards, allcards);
+     game.currPlayedCards = [[],[]];
+     $("#defCard, #attCard").html("");
+     ///don't need to change roles!
+     //draw cards - receive cards -change turn
+     //game.changeTurn();
+     //changeRoles();
+     game.drawCards();
+     //hide cards
+     restartCards();
+   });
+
+
+
 //TODO fix when we can see this button
     $("#btn-dpile").click(function(){
       game.isDefenceSucceded = true;

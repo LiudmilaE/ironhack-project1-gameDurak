@@ -77,7 +77,9 @@ GameDurak.prototype.startGame = function (numberOfPlayers) {
     var that=this;//GameDurak instance
     var num = 0;
     that.players.forEach(function(el){
-      if (el.cards.length===0){
+      if (el.cards.length>=6){
+        num = 0;
+      } else if (el.cards.length===0){
         num = 6;
       } else {
         if(el.cards.length>0 && el.cards.length<6 && that.deck.talon.length>(6-el.cards.length)){

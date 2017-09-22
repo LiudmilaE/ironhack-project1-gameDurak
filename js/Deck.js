@@ -63,10 +63,16 @@ Deck.prototype._shuffleDeck = function () {
 
 
 Deck.prototype._cardsToBeReceived = function (num) {
-  if(this.talon.length <= num){
-    return this.talon;
-  }
- var newCards = _.take(this.talon, num);
- this.talon = _.slice(this.talon, num);
- return newCards;
+  var newCards = [];
+  if (num===0) {
+    return newCards;
+  } else if(this.talon.length <= num && num!==0){
+    newCards = this.talon;
+    this.talon = [];
+    return newCards;
+  } else {
+   newCards = _.take(this.talon, num);
+   this.talon = _.slice(this.talon, num);
+   return newCards;
+ }
 };
