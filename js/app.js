@@ -13,6 +13,8 @@ $(document).ready(function(){
     $("#btn-dpile").click(function(){
       var allcards = _.flatten(game.currPlayedCards);
       game.discardPile = _.concat(game.discardPile, allcards);
+      game.currPlayedCards = [[],[]];
+      $("#defCard, #attCard").html("");
     });
 
   function restartCards(){

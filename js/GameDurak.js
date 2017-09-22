@@ -5,6 +5,7 @@ function GameDurak() {
   //change each turn //use _.flatten(array)
   this.currPlayedCards = [[],  //cards to attack
                           []]; //cards to defend
+  this.discardPile = [];
 }
 
 //The game is typically played with two to five people (because of recieve method of 6 cards)
