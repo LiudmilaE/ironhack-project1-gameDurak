@@ -34,7 +34,9 @@ $(document).ready(function(){
      var allcards = _.flatten(game.currPlayedCards);
      game.players[1].cards = _.concat(game.players[1].cards, allcards);
      game.currPlayedCards = [[],[]];
-     $("#defCard, #attCard").html("");
+     for(var i = 0; i<6; i++){
+       $("#attCard"+i+", #defCard"+i).html("");////TODO
+     }
      ///don't need to change roles!
      //draw cards - receive cards -change turn
      //game.changeTurn();
@@ -53,7 +55,9 @@ $(document).ready(function(){
       var allcards = _.flatten(game.currPlayedCards);
       game.discardPile = _.concat(game.discardPile, allcards);
       game.currPlayedCards = [[],[]];
-      $("#defCard, #attCard").html("");
+      for(var i = 0; i<6; i++){
+        $("#attCard"+i+", #defCard"+i).html("");////TODO
+      }
       //draw cards - receive cards -change turn
       game.changeTurn();
       changeRoles();
@@ -115,23 +119,25 @@ $(document).ready(function(){
     //console.log(card);
     if(game.players[1].isAttacker && game.canAttack){
       var legalAttack =  game.players[1].attack(card[0], game.currPlayedCards);
+      var indexToAddAttCard = game.currPlayedCards[0].length;
       game.currPlayedCards[0] = _.concat(game.currPlayedCards[0], legalAttack);
       $(event.target).detach();
-      $(event.target).appendTo("#attCard");
+      $(event.target).appendTo("#attCard"+indexToAddAttCard);
       $("#p1cards > div:last-child").html("");
       restartCards();
       $("#btn-p1").addClass("hide");
-      $("#btn-p0").removeClass("hide");
+      $("#btn-p0, #btn-p0-take").removeClass("hide");
     }
 
     if(game.players[1].isDefender && game.canAttack){
       var legalDef = game.players[1].defense(card[0], game.currPlayedCards[0][(game.currPlayedCards[0].length-1)]);
+      var indexToAddDefCard = game.currPlayedCards[1].length;
       game.currPlayedCards[1] = _.concat(game.currPlayedCards[1], legalDef);
       $(event.target).detach();
-      $(event.target).appendTo("#defCard");
+      $(event.target).appendTo("#defCard"+indexToAddDefCard);
       $("#p1cards > div:last-child").html("");
       restartCards();
-      $("#btn-p1").addClass("hide");
+      $("#btn-p1, #btn-p1-take").addClass("hide");
       $("#btn-p0").removeClass("hide");
     }
   });
@@ -146,23 +152,25 @@ $(document).ready(function(){
     //console.log(card);
     if(game.players[0].isAttacker && game.canAttack){
       var legalAttack = game.players[0].attack(card[0], game.currPlayedCards);
+      var indexToAddAttCard = game.currPlayedCards[0].length;
       game.currPlayedCards[0] = _.concat(game.currPlayedCards[0], legalAttack);
       $(event.target).detach();
-      $(event.target).appendTo("#attCard");
+      $(event.target).appendTo("#attCard"+indexToAddAttCard);
       $("#p0cards > div:last-child").html("");
       restartCards();
       $("#btn-p0").addClass("hide");
-      $("#btn-p1").removeClass("hide");
+      $("#btn-p1, #btn-p1-take").removeClass("hide");
     }
 
     if(game.players[0].isDefender && game.canAttack){
       var legalDef = game.players[0].defense(card[0], game.currPlayedCards[0][game.currPlayedCards[0].length-1]);
+      var indexToAddDefCard = game.currPlayedCards[1].length;
       game.currPlayedCards[1] = _.concat(game.currPlayedCards[1], legalDef);
       $(event.target).detach();
-      $(event.target).appendTo("#defCard");
+      $(event.target).appendTo("#defCard"+indexToAddDefCard);
       $("#p0cards > div:last-child").html("");
       restartCards();
-      $("#btn-p0").addClass("hide");
+      $("#btn-p0, #btn-p0-take").addClass("hide");
       $("#btn-p1").removeClass("hide");
     }
   });
