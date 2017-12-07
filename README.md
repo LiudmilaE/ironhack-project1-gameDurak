@@ -2,9 +2,8 @@
 # Ironhack | Project 1 | Game Durak
 
 ## Introduction
----
 
-This is a repo to practice in creating working game in browser as my first project during Ironhack Bootcamp
+This is a repository for one-week individual Project - creating a game. 
 
 #### DURAK 
 
@@ -12,7 +11,6 @@ This is a repo to practice in creating working game in browser as my first proje
 The object of the game is to get rid of all one's cards. At the end of the game, the last player with cards in his or her hands is the durak.
 
 ## Used technologies
----
 -JavaScript ES5
 -HTML5
 -CSS3
@@ -21,14 +19,15 @@ The object of the game is to get rid of all one's cards. At the end of the game,
 -Lodash
 
 ## Personal Opinion
----
-Фt first I was planning to make a game version with a computer, but it turned out to be much more complicated than I expected for a one-week timeframe. 
+At first I was planning to make a game version with a computer, but it turned out to be much more complicated than I expected for a one-week timeframe. 
 In the end I created a working version of the game, but it only works if the players do not cheat. And definitely it is not bug-free.
 
 ### Deployed on [GitHub pages](https://liudmilae.github.io/ironhack-project1-gameDurak/)
 
-## Game Rules
+### Presentation on [slides](http://slides.com/liudmylaiefremova/title-texttitle-text)
 ---
+
+## Game Rules
 
 -Two players
 -A deck of 36 cards
@@ -66,4 +65,4 @@ Player who exhausts his or her cards is a winner.
 The last person left with cards is the loser (the fool or "durak").
 
 
-**More information on [wikipedia](https://en.wikipedia.org/wiki/Durak)**
+**More information about the real card game[ on wikipedia](https://en.wikipedia.org/wiki/Durak)**
