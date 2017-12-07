@@ -3,20 +3,19 @@
 
 ## Introduction
 
-This is a repository for one-week individual Project - creating a game. 
+This is a repository for the one-week individual Project during Web Development Bootcamp in Ironhack in Paris - creating a game. 
 
-#### DURAK 
-
+*DURAK*
 (Russian: Дурак; IPA: [dʊˈrak] (About this sound listen), "fool") is a card game that is popular in post-Soviet states.
 The object of the game is to get rid of all one's cards. At the end of the game, the last player with cards in his or her hands is the durak.
 
 ## Used technologies
--JavaScript ES5
--HTML5
--CSS3
--Bootstrap
--jQuery
--Lodash
+- JavaScript ES5
+- HTML5
+- CSS3
+- Bootstrap
+- jQuery
+- Lodash
 
 ## Personal Opinion
 At first I was planning to make a game version with a computer, but it turned out to be much more complicated than I expected for a one-week timeframe. 
