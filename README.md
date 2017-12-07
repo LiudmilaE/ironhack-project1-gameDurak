@@ -28,15 +28,16 @@ In the end I created a working version of the game, but it only works if the pla
 
 ## Game Rules
 
--Two players
--A deck of 36 cards
+- *Two players*
+- *A deck of 36 cards*
 
-1.The deck is shuffled
-2.Each player receives 6 cards
-3.The bottom card of the remaining deck determines the trump suit
-4.The remainder of the deck forms a draw pile called the prikup ("talon") 
-5.Cards discarded due to successful defenses are placed in a discard pile next to the talon
-6.Ace is the highest rank and six is the lowest 7.Trumps always beat non-trump cards regardless of rank (e.g., a trump six beats a non-trump ace)
+1. The deck is shuffled
+2. Each player receives 6 cards
+3. The bottom card of the remaining deck determines the trump suit
+4. The remainder of the deck forms a draw pile called the prikup ("talon") 
+5. Cards discarded due to successful defenses are placed in a discard pile next to the talon
+6. Ace is the highest rank and six is the lowest 
+7. Trumps always beat non-trump cards regardless of rank (e.g., a trump six beats a non-trump ace)
 
 #### Gameplay
 The player with the lowest trump is the first attacker. The player to the attacker's left is always the defender.
